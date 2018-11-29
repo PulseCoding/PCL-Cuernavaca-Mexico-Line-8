@@ -970,8 +970,8 @@ client2.on('close', function() {
               /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
                 /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
                     if(secEOLManualPacking>=60 && CntOutEOLManualPacking){
-                      fs.appendFileSync("C:/PULSE/L8_LOGS/mex_pcl_EOL_L8.log","tt="+Date.now()+",var=EOL"+",val="+CntOutEOLManualPacking+"\n");
-                      secEOLManualPAcking=0;
+                      fs.appendFileSync("C:/PULSE/L8_LOGS/mex_pcl_EOLManualPacking_L8.log","tt="+Date.now()+",var=EOL"+",val="+CntOutEOLManualPacking+"\n");
+                      secEOLManualPacking=0;
                     }else{
                       secEOLManualPacking++;
                     }
