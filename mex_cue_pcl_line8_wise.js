@@ -222,7 +222,7 @@ var CasePackerct = null,
 var CntOutEOL=null,
     secEOL= 0;
 var CntOutEOLManualPacking=null,
-    secEOLMAnualPacking= 0;
+    secEOLManualPacking= 0;
 var publishConfig;
 var intId1,intId2,intId3;
 var files = fs.readdirSync("C:/PULSE/L8_LOGS/"); //Leer documentos
