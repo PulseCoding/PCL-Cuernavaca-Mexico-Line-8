@@ -221,6 +221,8 @@ var CasePackerct = null,
     CasePackerflagRunning = false;
 var CntOutEOL=null,
     secEOL= 0;
+var CntOutEOLManualPacking=null,
+    secEOLMAnualPacking= 0;
 var publishConfig;
 var intId1,intId2,intId3;
 var files = fs.readdirSync("C:/PULSE/L8_LOGS/"); //Leer documentos
@@ -702,6 +704,7 @@ client2.on('close', function() {
                   CntOutLabeler     = joinWord(resp.register[6], resp.register[7]);
                   CntOutEOL         = joinWord(resp.register[8], resp.register[9]);
                   CntInManualPacking = joinWord(resp.register[10], resp.register[11]);
+		  CntOutEOLManualPacking= joinWord(resp.register[14], resp.register[15]);
         //------------------------------------------Labeler----------------------------------------------
               Labelerct = CntOutLabeler // NOTE: igualar al contador de salida
               if (!LabelerONS && Labelerct) {
@@ -965,7 +968,16 @@ client2.on('close', function() {
                       secEOL++;
                     }
               /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
-                });//Cierre de lectura
+                /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
+                    if(secEOLManualPacking>=60 && CntOutEOLManualPacking){
+                      fs.appendFileSync("C:/PULSE/L8_LOGS/mex_pcl_EOL_L8.log","tt="+Date.now()+",var=EOL"+",val="+CntOutEOLManualPacking+"\n");
+                      secEOLManualPAcking=0;
+                    }else{
+                      secEOLManualPacking++;
+                    }
+              /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
+                
+		});//Cierre de lectura
 
               },1000);
           });//Cierre de cliente
