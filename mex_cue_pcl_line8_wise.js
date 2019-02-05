@@ -490,6 +490,7 @@ client2.on('connect', function(err) {
                 CntOutCapper    = joinWord(resp.register[4], resp.register[5]);
                 CntInLabeler    = joinWord(resp.register[6], resp.register[7]);
                 CntInCapper    = joinWord(resp.register[8], resp.register[9]);
+                CntOutEOLManualPacking= joinWord(resp.register[12], resp.register[13]);
         //------------------------------------------Depucker----------------------------------------------
               Depuckerct = CntOutDepucker // NOTE: igualar al contador de salida
               if (!DepuckerONS && Depuckerct) {
@@ -684,6 +685,15 @@ client2.on('connect', function(err) {
                 CapSupplysecStop = 0
               }
         //------------------------------------------CapSupply----------------------------------------------
+        /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
+            if(secEOLManualPacking>=60 && CntOutEOLManualPacking){
+              fs.appendFileSync("C:/PULSE/L8_LOGS/mex_pcl_EOLManualPacking_L8.log","tt="+Date.now()+",var=EOL"+",val="+CntOutEOLManualPacking+"\n");
+              secEOLManualPacking=0;
+            }else{
+              secEOLManualPacking++;
+            }
+      /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
+        
               });//Cierre de lectura
 
           },1000);
@@ -704,7 +714,6 @@ client2.on('close', function() {
                   CntOutLabeler     = joinWord(resp.register[6], resp.register[7]);
                   CntOutEOL         = joinWord(resp.register[8], resp.register[9]);
                   CntInManualPacking = joinWord(resp.register[10], resp.register[11]);
-		  CntOutEOLManualPacking= joinWord(resp.register[14], resp.register[15]);
         //------------------------------------------Labeler----------------------------------------------
               Labelerct = CntOutLabeler // NOTE: igualar al contador de salida
               if (!LabelerONS && Labelerct) {
@@ -968,15 +977,7 @@ client2.on('close', function() {
                       secEOL++;
                     }
               /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
-                /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
-                    if(secEOLManualPacking>=60 && CntOutEOLManualPacking){
-                      fs.appendFileSync("C:/PULSE/L8_LOGS/mex_pcl_EOLManualPacking_L8.log","tt="+Date.now()+",var=EOL"+",val="+CntOutEOLManualPacking+"\n");
-                      secEOLManualPacking=0;
-                    }else{
-                      secEOLManualPacking++;
-                    }
-              /*----------------------------------------------------------------------------------EOL----------------------------------------------------------------------------------*/
-                
+            
 		});//Cierre de lectura
 
               },1000);
