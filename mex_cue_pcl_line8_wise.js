@@ -974,7 +974,7 @@ client2.on('close', function() {
       fs.appendFileSync('C:/PULSE/L8_LOGS/mex_pcl_Capper_L8.log', 'tt=' + Date.now() + ',var=CPQR,val=' + eval(CapperDif - CapperReject.rejected) + '\n')
       CapperReject.rejected = CapperDif
       fs.writeFileSync('CapperRejected.json', '{"rejected": ' + CapperReject.rejected + '}')
-      var LaberlerDif = CntInLaberler - CntOutLaberler
+      var LaberlerDif = CntOutLabeler - CntOutLaberler
       fs.appendFileSync('C:/PULSE/L8_LOGS/mex_pcl_Laberler_L8.log', 'tt=' + Date.now() + ',var=CPQR,val=' + eval(LaberlerDif - LaberlerReject.rejected) + '\n')
       LaberlerReject.rejected = LaberlerDif
       fs.writeFileSync('LaberlerRejected.json', '{"rejected": ' + LaberlerReject.rejected + '}')
