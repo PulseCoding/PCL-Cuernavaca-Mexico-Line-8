@@ -330,9 +330,9 @@ client1.on('connect', function(err) {
   intId1 =
     setInterval(function(){
         client1.readHoldingRegisters(0, 16).then(function(resp) {
-          WaitFiller =  joinWord(resp.register[0], resp.register[1]);
-          CntOutFiller =  joinWord(resp.register[2], resp.register[3]);
-          CntInDepucker =  joinWord(resp.register[2], resp.register[3]);
+          WaitFiller =  joinWord(resp.register[2], resp.register[3]);
+          CntOutFiller =  joinWord(resp.register[0], resp.register[1]);
+          CntInDepucker =  joinWord(resp.register[0], resp.register[1]);
           CntInFiller =  joinWord(resp.register[4], resp.register[5]);
           CntOutBottleSorter =  joinWord(resp.register[6], resp.register[7]);
           CntRejBottleSorter =  joinWord(resp.register[8], resp.register[9]);
